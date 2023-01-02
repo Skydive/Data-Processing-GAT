@@ -61,8 +61,7 @@ def load_data(config):
 
     features = torch.FloatTensor(node_features.toarray())
     labels = torch.LongTensor(labels_enumerated)
-    adj = convert_scipy_to_torch_sparse(adj)
-
+    
     tqdm.write("Dataset loaded successfully!")
 
     return features, labels, adj, edges_ordered

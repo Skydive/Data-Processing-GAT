@@ -49,15 +49,15 @@ def visualize_graph(edges, node_labels, save=False):
 
     # A simple heuristic for vertex size. Multiplying with 0.75 gave decent visualization
     visual_style["vertex_size"] = [0.75*deg for deg in ig_graph.degree()]
-
     visual_style["vertex_color"] = [cora_label_to_color_map[label] for label in node_labels]
 
     # Display the cora graph
     visual_style["layout"] = ig_graph.layout_kamada_kawai()
-    out = ig.plot(ig_graph, **visual_style)
 
-    if save:
-        out.save("cora_visualized.png")
+    fig, ax = plt.subplots()
+    ig.plot(ig_graph, target=ax, **visual_style);
+    plt.show();
+
 
 
 def visualize_validation_performance(val_acc, val_loss):

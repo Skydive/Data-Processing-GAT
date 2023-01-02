@@ -4,7 +4,7 @@ import torch.nn as nn
 import numpy as np
 import time
 
-from model import GCNModel
+from model import GATModel
 from util import *
 from globals import config
 from visualization import *
@@ -87,15 +87,15 @@ if __name__ == "__main__":
     torch.random.manual_seed(1337)
 
     features, labels, adj, edges = load_data(config)
-    adj = convert_scipy_to_torch_sparse(adj)
-    # adj = torch.FloatTensor(np.array(adj.todense())) (Dense GAT)
+    # adj = convert_scipy_to_torch_sparse(adj)
+    adj = torch.FloatTensor(np.array(adj.todense()))
 
     # visualize_graph(edges, labels.cpu().tolist(), save=False)
     NUM_CLASSES = int(labels.max().item() + 1)
 
     train_set_ind, val_set_ind, test_set_ind = prepare_dataset(labels, NUM_CLASSES, config)
 
-    model = GCNModel(features.shape[1], config.hidden_dim, NUM_CLASSES, config.dropout, config.use_bias)
+    model = GATModel(features.shape[1], config.hidden_dim, NUM_CLASSES, config.dropout, config.alpha, config.head_count)
 
     tqdm.write(f"Started training with 1 run.");
     val_acc, val_loss = training_loop(model, features, labels, adj, train_set_ind, val_set_ind, config)
