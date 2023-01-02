@@ -1,0 +1,12 @@
+numpy
+scipy
+matplotlib
+
+torch == 1.9.1
+sklearn
+
+tqdm
+tk
+igraph
+
+pycairo
