@@ -10,7 +10,7 @@ To run Graph Attention Network:
 >python main_gat.py
 
 Results: (200 Epochs)
-GCN: (0:05 runtime) [Since sparse matrix implementation]
+GCN: (1.66s runtime) [Since sparse matrix implementation]
 Loss: 0.655
 Accuracy: 0.80
 
